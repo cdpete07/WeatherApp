@@ -3,15 +3,12 @@ Architecture starter template (single module)
 
 ## Features
 
-* Room Database
 * Hilt
 * ViewModel, read+write
 * UI in Compose, list + write (Material3)
 * Navigation
 * Repository and data source
 * Kotlin Coroutines and Flow
-* Unit tests
-* UI tests using fake data with Hilt
 
 # Android Weather App
 
