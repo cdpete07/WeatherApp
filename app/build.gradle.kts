@@ -49,7 +49,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            buildConfigField("String", "BASEURL", "\"https://api.openweathermap.org/data/2.5\"")
+            buildConfigField("String", "BASEURL", "\"https://api.openweathermap.org/data/2.5/\"")
             buildConfigField(
                 "String",
                 "API_KEY",
@@ -61,7 +61,7 @@ android {
         }
         getByName("debug") {
             debug {
-                buildConfigField("String", "BASEURL", "\"https://api.openweathermap.org/data/2.5\"")
+                buildConfigField("String", "BASEURL", "\"https://api.openweathermap.org/data/2.5/\"")
                 buildConfigField(
                     "String",
                     "API_KEY",

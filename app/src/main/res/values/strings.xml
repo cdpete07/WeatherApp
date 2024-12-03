@@ -23,5 +23,6 @@
     <string name="general_error_text">Something\'s Wrong</string>
     <string name="internet_300_error_text">Connection Went Somewhere else</string>
     <string name="internet_400_error_text">Client Connection Error</string>
+    <string name="internet_404_error_text">City Not Found</string>
     <string name="internet_500_error_text">Oops, Something\'s wrong with server</string>
 </resources>

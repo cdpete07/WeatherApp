@@ -22,12 +22,14 @@ import android.template.ui.theme.MyApplicationTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -50,6 +52,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -92,7 +95,7 @@ internal fun MainScreen(
 ) {
     var cityName by remember { mutableStateOf(MainViewModel.DEFAULT_PLACE) }
     var isFieldError by remember { mutableStateOf(false) }
-    val (focusedRequester) = FocusRequester.createRefs()
+    val (focusedRequester) = remember { FocusRequester.createRefs() }
 
 
     Scaffold(
@@ -119,7 +122,8 @@ internal fun MainScreen(
             OutlinedTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = 16.dp)
+                    .focusRequester(focusedRequester),
                 value = cityName,
                 onValueChange = { newValue -> cityName = newValue },
                 maxLines = 1,
@@ -205,11 +209,13 @@ internal fun ContentLoading() {
 }
 
 @Composable
-internal fun SuccessContent(weather: WeatherResponse) {
+internal fun BoxScope.SuccessContent(weather: WeatherResponse) {
     Column(
         modifier = Modifier
             .padding(vertical = 8.dp)
-            .fillMaxSize(),
+            .align(Alignment.Center)
+            .fillMaxWidth()
+            .wrapContentHeight(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -310,11 +316,19 @@ internal fun ErrorContent(throwable: Throwable) {
                     }
 
                     in 400..499 -> {
-                        Text(
-                            text = stringResource(R.string.internet_400_error_text),
-                            fontWeight = FontWeight.Bold,
-                            fontStyle = FontStyle.Italic
-                        )
+                        if (throwable.code() == 404) {
+                            Text(
+                                text = stringResource(R.string.internet_404_error_text),
+                                fontWeight = FontWeight.Bold,
+                                fontStyle = FontStyle.Italic
+                            )
+                        } else {
+                            Text(
+                                text = stringResource(R.string.internet_400_error_text),
+                                fontWeight = FontWeight.Bold,
+                                fontStyle = FontStyle.Italic
+                            )
+                        }
                     }
 
                     else -> {
