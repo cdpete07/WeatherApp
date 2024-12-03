@@ -1,11 +1,6 @@
 Architecture starter template (single module)
 ==================
 
-This template is compatible with the latest **stable** version of Android Studio.
-
-## Screenshots
-![Screenshot](https://github.com/android/architecture-templates/raw/main/screenshots.png)
-
 ## Features
 
 * Room Database
@@ -17,8 +12,6 @@ This template is compatible with the latest **stable** version of Android Studio
 * Kotlin Coroutines and Flow
 * Unit tests
 * UI tests using fake data with Hilt
-
-## Usage
 
 # Android Weather App
 
