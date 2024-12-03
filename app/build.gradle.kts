@@ -21,6 +21,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt.gradle)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.serialization)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -48,8 +49,25 @@ android {
 
     buildTypes {
         getByName("release") {
+            buildConfigField("String", "BASEURL", "\"https://api.openweathermap.org/data/2.5\"")
+            buildConfigField(
+                "String",
+                "API_KEY",
+                "\"\""
+            )
+
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        getByName("debug") {
+            debug {
+                buildConfigField("String", "BASEURL", "\"https://api.openweathermap.org/data/2.5\"")
+                buildConfigField(
+                    "String",
+                    "API_KEY",
+                    "\"\""
+                )
+            }
         }
     }
 
@@ -63,9 +81,9 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
         compose = true
         aidl = false
-        buildConfig = false
         renderScript = false
         shaders = false
     }
@@ -106,6 +124,13 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+
+    //Retrofit
+    implementation(libs.retrofit.retrofit)
+    implementation(libs.retrofit.converter.kotinx.serialization)
+    implementation(libs.retrofit.interceptor)
+    implementation(libs.serialization)
+    implementation(libs.flow.adapter)
 
     // Compose
     implementation(libs.androidx.compose.ui)

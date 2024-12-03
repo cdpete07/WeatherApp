@@ -22,7 +22,6 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
-import android.template.data.di.fakeMyModels
 
 @HiltAndroidTest
 class NavigationTest {
@@ -33,10 +32,5 @@ class NavigationTest {
     @get:Rule(order = 1)
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
-    @Test
-    fun test1() {
-        // TODO: Add navigation tests
-        composeTestRule.onNodeWithText(fakeMyModels.first(), substring = true).assertExists()
-    }
 }
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package android.template.ui.mymodel
+package android.template.ui.main
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -27,7 +27,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * UI tests for [MyModelScreen].
+ * UI tests for [MainScreen].
  */
 @RunWith(AndroidJUnit4::class)
 class MyModelScreenTest {
@@ -38,7 +38,7 @@ class MyModelScreenTest {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            MyModelScreen(FAKE_DATA, onSave = {})
+            MainScreen()
         }
     }
 

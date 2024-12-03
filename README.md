@@ -20,22 +20,50 @@ This template is compatible with the latest **stable** version of Android Studio
 
 ## Usage
 
-1. Clone this branch
+# Android Weather App
 
-```
-git clone https://github.com/android/architecture-templates.git --branch base
-```
+## Description
+This is an Android project that integrates with the [OpenWeatherMap API](https://api.openweathermap.org) to provide weather information.
 
-2. Run the customizer script:
+Before running the app, you need to configure some essential values in the `build.gradle.kts` file.
 
-```
-./customizer.sh your.package.name DataItemType [MyApplication]
-```
+---
 
-Where `your.package.name` is your app ID (should be lowercase) and `DataItemType` is used for the
-name of the screen, exposed state and data base entity (should be PascalCase). You can add an optional application name.
+## Prerequisites
 
-# License
+1. **Obtain API Credentials**
+    - Go to [OpenWeatherMap API](https://api.openweathermap.org) and sign up.
+    - Get your `API_KEY`.
 
-Now in Android is distributed under the terms of the Apache License (Version 2.0). See the
-[license](LICENSE) for more information.
+2. **Add the `BASEURL`**
+    - The base URL for OpenWeatherMap API is:
+      ```
+      https://api.openweathermap.org/
+      ```
+
+---
+
+## Configuration
+
+To run the app, you need to add the `BASEURL` and `API_KEY` in your `build.gradle` file using the `buildConfigField` method.
+
+### Steps:
+
+1. Open the `app/build.gradle` file.
+2. Add the following lines under the `android` block, inside the `buildTypes` section:
+
+```gradle
+android {
+    ...
+    buildTypes {
+        debug {
+            buildConfigField "String", "BASEURL", "\"https://api.openweathermap.org/\""
+            buildConfigField "String", "API_KEY", "\"your_api_key_here\""
+        }
+        release {
+            buildConfigField "String", "BASEURL", "\"https://api.openweathermap.org/\""
+            buildConfigField "String", "API_KEY", "\"your_api_key_here\""
+            ...
+        }
+    }
+}

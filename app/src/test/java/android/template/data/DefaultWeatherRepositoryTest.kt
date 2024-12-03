@@ -17,25 +17,19 @@
 package android.template.data
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flow
 import android.template.data.local.database.MyModel
 import android.template.data.local.database.MyModelDao
-import javax.inject.Inject
 
-interface MyModelRepository {
-    val myModels: Flow<List<String>>
+private class FakeMyModelDao : MyModelDao {
 
-    suspend fun add(name: String)
-}
+    private val data = mutableListOf<MyModel>()
 
-class DefaultMyModelRepository @Inject constructor(
-    private val myModelDao: MyModelDao
-) : MyModelRepository {
+    override fun getMyModels(): Flow<List<MyModel>> = flow {
+        emit(data)
+    }
 
-    override val myModels: Flow<List<String>> =
-        myModelDao.getMyModels().map { items -> items.map { it.name } }
-
-    override suspend fun add(name: String) {
-        myModelDao.insertMyModel(MyModel(name = name))
+    override suspend fun insertMyModel(item: MyModel) {
+        data.add(0, item)
     }
 }

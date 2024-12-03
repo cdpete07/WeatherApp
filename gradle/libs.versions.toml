@@ -15,6 +15,10 @@ hilt = "2.52"
 junit = "4.13.2"
 kotlin = "2.0.21"
 ksp = "2.0.21-1.0.27"
+retrofit-version = "2.11.0"
+retrofit-interceptor-version = "4.10.0"
+serialization = "1.7.0"
+flow-adapter-version = "0.9.2"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
@@ -44,8 +48,16 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 hilt-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+# Retrofit
+retrofit-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit-version" }
+retrofit-converter-kotinx-serialization = { group = "com.squareup.retrofit2", name ="converter-kotlinx-serialization", version.ref = "retrofit-version"}
+retrofit-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "retrofit-interceptor-version" }
+# Serialization
+serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+flow-adapter = { module = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter", version.ref = "flow-adapter-version" }
 
 [plugins]
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
